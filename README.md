@@ -42,10 +42,10 @@ The Lost & Found Portal is designed to simplify the process of posting lost item
 👥 Team Member Contributions
     Name	                    Role
     1. Nethindu Chandula	    - Developer Head
-    2. Akindu Samarasinghe 	- Backend Developer
-    3. Akila Benaragama	    - Backend Developer, Deployment & Hosting
-    4. Thenul Minjaya	      - Frontend Developer
-    5. Pasindu Jayasekara	  - Frontend Developer
+    2. Akindu Samarasinghe 	    - Backend Developer
+    3. Akila Benaragama	        - Backend Developer, Deployment & Hosting
+    4. Thenul Minjaya	        - Frontend Developer
+    5. Pasindu Jayasekara	    - Frontend Developer
 
 📬 Contact & Feedback
 Feel free to open issues or pull requests if you'd like to contribute or suggest improvements.
