@@ -101,7 +101,7 @@ exports.verifyEmail = async (req, res) => {
     });
 
     if (!user) {
-      return res.redirect('http://localhost:3000/login?verified=fail');
+      return res.redirect('http://13.49.244.15:3000/login?verified=fail');
     }
 
     user.isVerified = true;
@@ -109,10 +109,10 @@ exports.verifyEmail = async (req, res) => {
     user.verifyTokenExpires = undefined;
     await user.save();
 
-    return res.redirect('http://localhost:3000/login?verified=success');
+    return res.redirect('http://13.49.244.15:3000/login?verified=success');
   } catch (err) {
     console.error('Verification error:', err);
-    return res.redirect('http://localhost:3000/login?verified=error');
+    return res.redirect('http://13.49.244.15:3000/login?verified=error');
   }
 };
 
@@ -128,7 +128,7 @@ exports.forgotPassword = async (req, res) => {
   user.resetPasswordExpires = Date.now() + 3600000;
   await user.save();
 
-  const link = `http://localhost:3000/login?resetToken=${token}`;
+  const link = `http://13.49.244.15:3000/login?resetToken=${token}`;
   const html = `
   <p>Click the link below to reset your password:</p>
   <a href="${link}">${link}</a>
