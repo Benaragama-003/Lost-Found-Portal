@@ -6,6 +6,11 @@ const foundItemSchema = new mongoose.Schema({
   foundlocation: String,
   findercontact: String,
   founddescription: String,
+  matchStatus: {
+  type: String,
+  enum: ['pending', 'approved', 'rejected'],
+  default: 'pending'
+  },
   email: { type: String, required: true },
 });
 

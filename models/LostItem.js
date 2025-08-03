@@ -7,6 +7,11 @@ const lostItemSchema = new mongoose.Schema({
   ownername: String,
   ownerphonenumber: String,
   lostdescription: String,
+  matchStatus: {
+  type: String,
+  enum: ['pending', 'approved', 'rejected'],
+  default: 'pending'
+  },
   email: { type: String, required: true },
 });
 

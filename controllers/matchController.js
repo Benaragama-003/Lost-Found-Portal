@@ -46,9 +46,19 @@ exports.approveMatch = async (req, res) => {
       return res.status(404).json({ error: 'Items not found' });
     }
 
+    lostItem.matchStatus = 'approved';
+    foundItem.matchStatus = 'approved';
+
+    await lostItem.save();
+    await foundItem.save();
+
     // Notify both users
     const lostUser = await User.findOne({ email: lostItem.email });
     const foundUser = await User.findOne({ email: foundItem.email });
+
+    if (!lostUser || !foundUser) {
+      return res.status(404).json({ message: 'User information missing for notification' });
+    }
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
@@ -69,7 +79,7 @@ exports.approveMatch = async (req, res) => {
       from: process.env.EMAIL_USER,
       to: foundUser.email,
       subject: 'Found Item Match Confirmed',
-      text: `Your found item matches someone’s lost report: ${lostItem.lostitem}.\nOwner Contact: ${lostItem.ownercontact}\nDescription: ${lostItem.lostdescription}`
+      text: `Your found item matches someone’s lost report: ${lostItem.lostitem}.\nOwner Contact: ${lostItem.ownerphonenumber}\nDescription: ${lostItem.lostdescription}`
     };
 
     await transporter.sendMail(mailOptionsLost);
@@ -80,5 +90,17 @@ exports.approveMatch = async (req, res) => {
   } catch (err) {
     console.error('Approval error:', err);
     res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+exports.rejectMatch = async (req, res) => {
+  const { lostItemId, foundItemId } = req.body;
+  try {
+    await LostItem.findByIdAndUpdate(lostItemId, { matchStatus: 'rejected' });
+    await FoundItem.findByIdAndUpdate(foundItemId, { matchStatus: 'rejected' });
+    res.json({ success: true, message: 'Match rejected successfully' });
+  } catch (err) {
+    console.error('Rejection error:', err);
+    res.status(500).json({ error: 'Failed to reject match' });
   }
 };
