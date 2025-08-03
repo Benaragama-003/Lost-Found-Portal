@@ -5,5 +5,6 @@ const { approveMatch } = require('../controllers/matchController');
 
 router.get('/suggested-matches', matchController.getSuggestedMatches);
 router.post('/approve', approveMatch);
+router.post('/reject', matchController.rejectMatch);
 
 module.exports = router;
