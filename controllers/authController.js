@@ -35,7 +35,7 @@ exports.signup = async (req, res) => {
     await user.save();
 
     // Send verification email
-    const verifyLink = process.env.ENDPOINT + `/api/auth/verify-email/${verifyToken}`;
+    const verifyLink = `http://13.61.175.26:3001/api/auth/verify-email/${verifyToken}`;
     const html = `
       <p>Hi ${name},</p>
       <p>Please verify your email address by clicking the link below:</p>
